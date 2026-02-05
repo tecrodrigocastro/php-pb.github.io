@@ -4,8 +4,8 @@ Site oficial da comunidade PHP da Paraíba, refatorado com TALL Stack.
 
 ## Stack
 
-- **Laravel** - Framework PHP
-- **Livewire** - Componentes reativos
+- **Laravel 12** - Framework PHP
+- **Livewire 4** - Componentes reativos
 - **Tailwind CSS** - Estilização
 - **Alpine.js** - Interatividade (incluso no Livewire)
 - **MySQL** - Banco de dados
