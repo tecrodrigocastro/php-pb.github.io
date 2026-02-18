@@ -32,7 +32,7 @@ new class extends Component
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Grupo no Telegram</h3>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Grupo no WhatsApp</h3>
                 <p class="text-gray-600 dark:text-gray-400">
                     Discussões diárias sobre PHP, Laravel, dúvidas técnicas e networking com outros devs.
                 </p>
