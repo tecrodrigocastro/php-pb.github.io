@@ -12,32 +12,29 @@ new class extends Component
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
             <!-- Image/Illustration -->
-            <div class="relative">
-                <div class="aspect-square rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900 dark:to-primary-800 p-8 lg:p-12">
-                    <!-- PHP Elephant -->
-                    <div class="w-full h-full flex items-center justify-center">
-                        <img src="{{ asset('images/php-pb-logo.svg') }}" class="w-48 h-48 lg:w-64 lg:h-64" alt="PHP-PB Logo">
-                    </div>
+            <div class="relative mx-4 lg:mx-0">
+                <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900 dark:to-primary-800 flex items-center justify-center">
+                    <img src="{{ asset('images/php-pb-logo.svg') }}" class="w-3/4 max-w-xs lg:max-w-sm" alt="PHP-PB Logo">
                 </div>
                 <!-- Floating elements -->
-                <div class="absolute -top-4 -right-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
+                <div class="absolute top-4 right-4 lg:-top-4 lg:-right-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 lg:p-4">
                     <div class="flex items-center space-x-2">
-                        <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-8 h-8 lg:w-10 lg:h-10 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 lg:w-5 lg:h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
-                        <span class="text-sm font-medium text-gray-900 dark:text-white">Comunidade Ativa</span>
+                        <span class="text-xs lg:text-sm font-medium text-gray-900 dark:text-white">Comunidade Ativa</span>
                     </div>
                 </div>
-                <div class="absolute -bottom-4 -left-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
+                <div class="absolute bottom-4 left-4 lg:-bottom-4 lg:-left-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 lg:p-4">
                     <div class="flex items-center space-x-2">
-                        <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
-                            <svg class="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-8 h-8 lg:w-10 lg:h-10 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 lg:w-5 lg:h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                             </svg>
                         </div>
-                        <span class="text-sm font-medium text-gray-900 dark:text-white">+500 membros</span>
+                        <span class="text-xs lg:text-sm font-medium text-gray-900 dark:text-white">+500 membros</span>
                     </div>
                 </div>
             </div>
