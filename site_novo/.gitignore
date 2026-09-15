@@ -12,6 +12,7 @@
 /.vscode
 /.zed
 /auth.json
+/build
 /node_modules
 /public/build
 /public/hot
@@ -19,6 +20,7 @@
 /storage/*.key
 /storage/pail
 /vendor
+phpstan.neon
 Homestead.json
 Homestead.yaml
 Thumbs.db

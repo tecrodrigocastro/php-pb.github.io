@@ -31,12 +31,20 @@ class Post extends Model
         'is_featured' => 'boolean',
     ];
 
+    /**
+     * @param  Builder<Post>  $query
+     * @return Builder<Post>
+     */
     public function scopePublished(Builder $query): Builder
     {
         return $query->whereNotNull('published_at')
             ->whereDate('published_at', '<=', Carbon::now());
     }
 
+    /**
+     * @param  Builder<Post>  $query
+     * @return Builder<Post>
+     */
     public function scopeFeatured(Builder $query): Builder
     {
         return $query->published()->where('is_featured', true);
