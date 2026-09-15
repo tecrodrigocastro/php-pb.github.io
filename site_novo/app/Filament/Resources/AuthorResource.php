@@ -56,6 +56,7 @@ class AuthorResource extends Resource
                 ->image()
                 ->disk('public')
                 ->directory('authors')
+                ->maxSize(5120)
                 ->columnSpanFull(),
         ]);
     }

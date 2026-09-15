@@ -21,7 +21,7 @@ class Author extends Model
     public function getAvatar(): ?string
     {
         if ($this->avatar) {
-            return Storage::url($this->avatar);
+            return Storage::disk('public')->url($this->avatar);
         }
 
         return null;

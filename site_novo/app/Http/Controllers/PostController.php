@@ -13,7 +13,7 @@ class PostController extends Controller
 
     public function show(string $slug)
     {
-        $post = Post::whereSlug($slug)->published()->firstOrFail();
+        $post = Post::whereSlug($slug)->published()->with(['category', 'author'])->firstOrFail();
 
         return view('blog.show', ['post' => $post]);
     }

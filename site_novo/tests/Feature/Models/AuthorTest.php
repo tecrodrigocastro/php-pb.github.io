@@ -2,6 +2,7 @@
 
 use App\Models\Author;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 test('it has many posts', function () {
     $author = Author::factory()->create();
@@ -16,7 +17,7 @@ test('it has many posts', function () {
 test('getAvatar returns the storage url when an avatar is set', function () {
     $author = Author::factory()->create(['avatar' => 'authors/avatar.jpg']);
 
-    expect($author->getAvatar())->toContain('authors/avatar.jpg');
+    expect($author->getAvatar())->toBe(Storage::disk('public')->url('authors/avatar.jpg'));
 });
 
 test('getAvatar returns null when there is no avatar', function () {

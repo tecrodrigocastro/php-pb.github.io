@@ -63,7 +63,7 @@ class Post extends Model
     public function getMainImage(): ?string
     {
         if ($this->main_image_upload) {
-            return Storage::url($this->main_image_upload);
+            return Storage::disk('public')->url($this->main_image_upload);
         }
 
         return $this->main_image_url;

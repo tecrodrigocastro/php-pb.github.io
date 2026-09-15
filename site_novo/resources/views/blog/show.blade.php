@@ -54,7 +54,7 @@
                         <div class="flex items-center gap-4">
                             @if ($post->author->getAvatar())
                                 <img src="{{ $post->author->getAvatar() }}"
-                                     class="w-14 h-14 rounded-full object-cover flex-shrink-0"
+                                     class="w-14 h-14 rounded-full object-cover shrink-0"
                                      alt="{{ $post->author->name }}">
                             @endif
                             <div>

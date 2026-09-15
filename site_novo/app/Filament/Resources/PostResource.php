@@ -17,7 +17,6 @@ use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Pboivin\FilamentPeek\Forms\Actions\InlinePreviewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -25,6 +24,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Pboivin\FilamentPeek\Forms\Actions\InlinePreviewAction;
 use Pboivin\FilamentPeek\Tables\Actions\ListPreviewAction;
 
 class PostResource extends Resource
@@ -96,6 +96,7 @@ class PostResource extends Resource
                     ->image()
                     ->disk('public')
                     ->directory('posts')
+                    ->maxSize(5120)
                     ->columnSpanFull(),
             ])->collapsible(),
 

@@ -1,7 +1,7 @@
 @props(['image' => null, 'url' => null, 'alt' => '', 'caption' => null, 'ratio' => '16-9'])
 
 @php
-    $src = $image ? \Illuminate\Support\Facades\Storage::url($image) : $url;
+    $src = $image ? \Illuminate\Support\Facades\Storage::disk('public')->url($image) : $url;
     $ratioClass = \App\Filament\Blocks\Image::getRatioClass($ratio ?: '16-9');
 @endphp
 

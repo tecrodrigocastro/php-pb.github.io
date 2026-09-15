@@ -3,6 +3,7 @@
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 test('published scope only returns posts with a published_at in the past', function () {
     $published = Post::factory()->create(['published_at' => now()->subDay()]);
@@ -43,7 +44,7 @@ test('getMainImage prefers the uploaded image over the external url', function (
         'main_image_url' => 'https://example.com/image.jpg',
     ]);
 
-    expect($post->getMainImage())->toContain('posts/uploaded.jpg');
+    expect($post->getMainImage())->toBe(Storage::disk('public')->url('posts/uploaded.jpg'));
 });
 
 test('getMainImage falls back to the external url when there is no upload', function () {

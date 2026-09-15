@@ -17,7 +17,8 @@ class Image
                 FileUpload::make('image')
                     ->label('Upload de imagem')
                     ->image()
-                    ->disk('public'),
+                    ->disk('public')
+                    ->maxSize(5120),
 
                 TextInput::make('url')
                     ->label('ou URL da imagem'),

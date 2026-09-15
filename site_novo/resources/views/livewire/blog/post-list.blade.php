@@ -17,7 +17,7 @@
                         class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
                     <option value="">Todas as categorias</option>
                     @foreach ($categories as $cat)
-                        <option value="{{ $cat['slug'] }}">{{ $cat['name'] }}</option>
+                        <option wire:key="category-{{ $cat['slug'] }}" value="{{ $cat['slug'] }}">{{ $cat['name'] }}</option>
                     @endforeach
                 </select>
 
@@ -39,12 +39,12 @@
         @if (count($posts) > 0)
             <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($posts as $post)
-                    <article class="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-800">
+                    <article wire:key="post-{{ $post['slug'] }}" class="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-800">
                         <a href="{{ route('blog.show', ['slug' => $post['slug']]) }}" class="block">
                             @if ($post['main_image_upload'] || $post['main_image_url'])
                                 <div class="aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">
                                     <img class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                                         src="{{ $post['main_image_upload'] ? \Illuminate\Support\Facades\Storage::url($post['main_image_upload']) : $post['main_image_url'] }}"
+                                         src="{{ $post['main_image_upload'] ? \Illuminate\Support\Facades\Storage::disk('public')->url($post['main_image_upload']) : $post['main_image_url'] }}"
                                          alt="{{ $post['title'] }}"
                                          loading="lazy">
                                 </div>
@@ -73,7 +73,7 @@
                                 @if ($post['author'])
                                     <span class="flex items-center gap-1.5">
                                         @if ($post['author']['avatar'])
-                                            <img src="{{ \Illuminate\Support\Facades\Storage::url($post['author']['avatar']) }}"
+                                            <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($post['author']['avatar']) }}"
                                                  class="w-5 h-5 rounded-full object-cover"
                                                  alt="{{ $post['author']['name'] }}">
                                         @endif
