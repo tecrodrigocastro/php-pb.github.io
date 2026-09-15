@@ -11,12 +11,17 @@ class PostList extends Component
     const ITEMS_PER_PAGE = 9;
 
     public $categories;
+
     public $postCount = 0;
+
     public $posts = [];
+
     public $hasMore = false;
+
     public $page = 1;
 
     public string $category = '';
+
     public string $order = 'date_desc';
 
     protected $queryString = [
