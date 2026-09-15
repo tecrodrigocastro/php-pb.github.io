@@ -9,6 +9,8 @@ services:
       - "8080:80"
     volumes:
       - ./site_novo:/var/www
+      - laravel-storage:/var/www/storage
+      - laravel-cache:/var/www/bootstrap/cache
       - ./site_novo/docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     depends_on:
       - mysql
@@ -76,3 +78,5 @@ networks:
 volumes:
   mysql-data:
   redis-data:
+  laravel-storage:
+  laravel-cache:
