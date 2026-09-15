@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
+    libicu-dev\
     zip \
     unzip \
     supervisor \
@@ -23,7 +24,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl
 
 # Install Redis extension
 RUN pecl install redis && docker-php-ext-enable redis
@@ -51,9 +52,16 @@ COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Copy PHP configuration
 COPY docker/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
-# Set permissions
-RUN chown -R $user:www-data /var/www/storage /var/www/bootstrap/cache
-RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+# Prepare Laravel writable paths
+RUN mkdir -p \
+    /var/www/storage \
+    /var/www/bootstrap/cache \
+    && chown -R $user:www-data \
+        /var/www/storage \
+        /var/www/bootstrap/cache \
+    && chmod -R 775 \
+        /var/www/storage \
+        /var/www/bootstrap/cache
 
 # Expose port
 EXPOSE 80
