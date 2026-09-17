@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(CategorySeeder::class);
+
         User::updateOrCreate(
             ['email' => 'admin@php-pb.net'],
             [
