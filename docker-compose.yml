@@ -17,15 +17,6 @@ services:
       - redis
     networks:
       - php-pb-network
-    environment:
-      - DB_CONNECTION=mysql
-      - DB_HOST=mysql
-      - DB_PORT=3306
-      - DB_DATABASE=php_pb
-      - DB_USERNAME=php_pb
-      - DB_PASSWORD=secret
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
 
   mysql:
     image: mysql:8.0

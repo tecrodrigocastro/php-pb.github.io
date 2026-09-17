@@ -1,31 +1,27 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Member\Resources;
 
 use App\Enums\PostStatus;
 use App\Filament\Fields\PostContent;
-use App\Filament\Resources\PostResource\Pages;
+use App\Filament\Member\Resources\PostResource\Pages;
 use App\Models\Post;
-use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
-use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Pboivin\FilamentPeek\Forms\Actions\InlinePreviewAction;
 use Pboivin\FilamentPeek\Tables\Actions\ListPreviewAction;
@@ -36,15 +32,16 @@ class PostResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Blog';
+    protected static ?string $navigationLabel = 'Meus Artigos';
 
-    protected static ?string $navigationLabel = 'Posts';
+    protected static ?string $modelLabel = 'Artigo';
 
-    protected static ?string $modelLabel = 'Post';
+    protected static ?string $pluralModelLabel = 'Meus Artigos';
 
-    protected static ?string $pluralModelLabel = 'Posts';
-
-    protected static ?int $navigationSort = 1;
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('author_id', Filament::auth()->id());
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -66,16 +63,6 @@ class PostResource extends Resource
                     ->required()
                     ->unique(ignoreRecord: true),
 
-                Select::make('status')
-                    ->label('Status')
-                    ->options(PostStatus::class)
-                    ->required()
-                    ->default(PostStatus::Draft),
-
-                DateTimePicker::make('published_at')
-                    ->label('Publicado em')
-                    ->nullable(),
-
                 Select::make('category_id')
                     ->label('Categoria')
                     ->relationship('category', 'name')
@@ -83,27 +70,28 @@ class PostResource extends Resource
                     ->searchable()
                     ->preload(),
 
-                Select::make('author_id')
-                    ->label('Autor')
-                    ->relationship('author', 'name')
-                    ->nullable()
-                    ->searchable()
-                    ->preload(),
+                Select::make('status')
+                    ->label('Status')
+                    ->options(function (?Post $record) {
+                        if ($record && in_array($record->status, [PostStatus::Published, PostStatus::Rejected], true)) {
+                            return [$record->status->value => $record->status->getLabel()];
+                        }
 
-                Toggle::make('is_featured')
-                    ->label('Destaque')
-                    ->columnSpanFull()
-                    ->default(false),
+                        return [
+                            PostStatus::Draft->value => PostStatus::Draft->getLabel(),
+                            PostStatus::Pending->value => PostStatus::Pending->getLabel(),
+                        ];
+                    })
+                    ->default(PostStatus::Draft)
+                    ->helperText('Escolha "Em revisão" quando estiver pronto para um admin aprovar.')
+                    ->disabled(fn (?Post $record) => $record && in_array($record->status, [PostStatus::Published, PostStatus::Rejected], true))
+                    ->dehydrated()
+                    ->required(),
             ]),
 
             Section::make('Imagem principal')->schema([
-                TextInput::make('main_image_url')
-                    ->label('URL da imagem')
-                    ->url()
-                    ->columnSpanFull(),
-
                 FileUpload::make('main_image_upload')
-                    ->label('ou Upload de imagem')
+                    ->label('Upload de imagem')
                     ->image()
                     ->disk('public')
                     ->directory('posts')
@@ -140,62 +128,26 @@ class PostResource extends Resource
                     ->label('Categoria')
                     ->sortable(),
 
-                TextColumn::make('author.name')
-                    ->label('Autor')
-                    ->sortable(),
-
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
                     ->sortable(),
 
-                IconColumn::make('is_featured')
-                    ->label('Destaque')
-                    ->boolean(),
-
                 TextColumn::make('published_at')
                     ->label('Publicado')
                     ->dateTime('d/m/Y H:i')
+                    ->placeholder('—')
                     ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('category')->label('Categoria')->relationship('category', 'name'),
-                SelectFilter::make('author')->label('Autor')->relationship('author', 'name'),
                 SelectFilter::make('status')->label('Status')->options(PostStatus::class),
-                TernaryFilter::make('is_featured')->label('Destaque'),
             ])
             ->recordActions([
-                Action::make('approve')
-                    ->label('Aprovar')
-                    ->icon('heroicon-o-check-circle')
-                    ->color('success')
-                    ->visible(fn (Post $record) => $record->status === PostStatus::Pending)
-                    ->action(function (Post $record) {
-                        $record->update([
-                            'status' => PostStatus::Published,
-                            'published_at' => $record->published_at ?? now(),
-                        ]);
-
-                        Notification::make()->title('Post aprovado e publicado')->success()->send();
-                    }),
-
-                Action::make('reject')
-                    ->label('Rejeitar')
-                    ->icon('heroicon-o-x-circle')
-                    ->color('danger')
-                    ->requiresConfirmation()
-                    ->visible(fn (Post $record) => $record->status === PostStatus::Pending)
-                    ->action(function (Post $record) {
-                        $record->update(['status' => PostStatus::Rejected]);
-
-                        Notification::make()->title('Post rejeitado')->warning()->send();
-                    }),
-
                 ListPreviewAction::make(),
                 EditAction::make(),
-                DeleteAction::make(),
+                DeleteAction::make()->visible(fn (Post $record) => $record->status !== PostStatus::Published),
             ])
-            ->defaultSort('published_at', 'desc');
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getPages(): array

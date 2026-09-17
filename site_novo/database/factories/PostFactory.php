@@ -2,9 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Author;
+use App\Enums\PostStatus;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
@@ -27,7 +28,8 @@ class PostFactory extends Factory
             'main_image_url' => null,
             'main_image_upload' => null,
             'category_id' => Category::factory(),
-            'author_id' => Author::factory(),
+            'author_id' => User::factory(),
+            'status' => PostStatus::Published,
             'published_at' => now()->subDay(),
             'is_featured' => false,
         ];
@@ -35,7 +37,18 @@ class PostFactory extends Factory
 
     public function unpublished(): static
     {
-        return $this->state(['published_at' => null]);
+        return $this->state([
+            'status' => PostStatus::Draft,
+            'published_at' => null,
+        ]);
+    }
+
+    public function pending(): static
+    {
+        return $this->state([
+            'status' => PostStatus::Pending,
+            'published_at' => null,
+        ]);
     }
 
     public function scheduled(): static

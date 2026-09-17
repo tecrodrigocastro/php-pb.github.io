@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PostResource\Pages;
 
+use App\Filament\Concerns\HasPostPreview;
 use App\Filament\Resources\PostResource;
 use Filament\Resources\Pages\CreateRecord;
 

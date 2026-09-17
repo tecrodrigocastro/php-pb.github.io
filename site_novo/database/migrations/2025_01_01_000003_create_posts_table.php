@@ -16,7 +16,8 @@ return new class extends Migration
             $table->text('main_image_url')->nullable();
             $table->string('main_image_upload')->nullable();
             $table->foreignId('category_id')->constrained('categories')->restrictOnDelete();
-            $table->foreignId('author_id')->nullable()->constrained('authors')->nullOnDelete();
+            $table->foreignId('author_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('status')->default('draft');
             $table->dateTime('published_at')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->timestamps();

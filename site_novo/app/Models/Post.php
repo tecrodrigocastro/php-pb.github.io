@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PostStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,12 +22,14 @@ class Post extends Model
         'main_image_upload',
         'category_id',
         'author_id',
+        'status',
         'published_at',
         'is_featured',
     ];
 
     protected $casts = [
         'content_blocks' => 'array',
+        'status' => PostStatus::class,
         'published_at' => 'datetime',
         'is_featured' => 'boolean',
     ];
@@ -37,7 +40,8 @@ class Post extends Model
      */
     public function scopePublished(Builder $query): Builder
     {
-        return $query->whereNotNull('published_at')
+        return $query->where('status', PostStatus::Published)
+            ->whereNotNull('published_at')
             ->whereDate('published_at', '<=', Carbon::now());
     }
 
@@ -50,6 +54,15 @@ class Post extends Model
         return $query->published()->where('is_featured', true);
     }
 
+    /**
+     * @param  Builder<Post>  $query
+     * @return Builder<Post>
+     */
+    public function scopePending(Builder $query): Builder
+    {
+        return $query->where('status', PostStatus::Pending);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -57,7 +70,7 @@ class Post extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function getMainImage(): ?string
