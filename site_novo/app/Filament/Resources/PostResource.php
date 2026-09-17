@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\PostStatus;
 use App\Filament\Fields\PostContent;
 use App\Filament\Resources\PostResource\Pages;
 use App\Models\Post;
+use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DateTimePicker;
@@ -12,6 +14,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Grid;
@@ -50,7 +53,7 @@ class PostResource extends Resource
                 TextInput::make('title')
                     ->label('Título')
                     ->required()
-                    ->lazy()
+                    ->live(debounce: 500)
                     ->afterStateUpdated(function ($set, $get, $state) {
                         if ($get('slug')) {
                             return;
@@ -63,6 +66,12 @@ class PostResource extends Resource
                     ->required()
                     ->unique(ignoreRecord: true),
 
+                Select::make('status')
+                    ->label('Status')
+                    ->options(PostStatus::class)
+                    ->required()
+                    ->default(PostStatus::Draft),
+
                 DateTimePicker::make('published_at')
                     ->label('Publicado em')
                     ->nullable(),
@@ -71,13 +80,15 @@ class PostResource extends Resource
                     ->label('Categoria')
                     ->relationship('category', 'name')
                     ->required()
-                    ->searchable(),
+                    ->searchable()
+                    ->preload(),
 
                 Select::make('author_id')
                     ->label('Autor')
                     ->relationship('author', 'name')
                     ->nullable()
-                    ->searchable(),
+                    ->searchable()
+                    ->preload(),
 
                 Toggle::make('is_featured')
                     ->label('Destaque')
@@ -133,6 +144,11 @@ class PostResource extends Resource
                     ->label('Autor')
                     ->sortable(),
 
+                TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->sortable(),
+
                 IconColumn::make('is_featured')
                     ->label('Destaque')
                     ->boolean(),
@@ -145,9 +161,36 @@ class PostResource extends Resource
             ->filters([
                 SelectFilter::make('category')->label('Categoria')->relationship('category', 'name'),
                 SelectFilter::make('author')->label('Autor')->relationship('author', 'name'),
+                SelectFilter::make('status')->label('Status')->options(PostStatus::class),
                 TernaryFilter::make('is_featured')->label('Destaque'),
             ])
             ->recordActions([
+                Action::make('approve')
+                    ->label('Aprovar')
+                    ->icon('heroicon-o-check-circle')
+                    ->color('success')
+                    ->visible(fn (Post $record) => $record->status === PostStatus::Pending)
+                    ->action(function (Post $record) {
+                        $record->update([
+                            'status' => PostStatus::Published,
+                            'published_at' => $record->published_at ?? now(),
+                        ]);
+
+                        Notification::make()->title('Post aprovado e publicado')->success()->send();
+                    }),
+
+                Action::make('reject')
+                    ->label('Rejeitar')
+                    ->icon('heroicon-o-x-circle')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->visible(fn (Post $record) => $record->status === PostStatus::Pending)
+                    ->action(function (Post $record) {
+                        $record->update(['status' => PostStatus::Rejected]);
+
+                        Notification::make()->title('Post rejeitado')->warning()->send();
+                    }),
+
                 ListPreviewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
