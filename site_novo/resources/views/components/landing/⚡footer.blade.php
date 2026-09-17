@@ -14,9 +14,7 @@ new class extends Component
             <!-- Brand -->
             <div class="lg:col-span-2">
                 <a href="/" class="flex items-center space-x-3 mb-6">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-violet-600 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-lg font-display">PB</span>
-                    </div>
+                    <img src="{{ asset('images/logo_phppb.png') }}" alt="PHP-PB" class="w-10 h-10 object-contain">
                     <span class="text-xl font-bold font-display">PHP-PB</span>
                 </a>
                 <p class="text-gray-400 max-w-md mb-6">
