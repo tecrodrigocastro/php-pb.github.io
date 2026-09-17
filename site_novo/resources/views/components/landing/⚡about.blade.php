@@ -4,15 +4,21 @@ use Livewire\Component;
 
 new class extends Component
 {
-    public $timeline = [];
+    public int $foundedYear = 2012;
+
+    public int $yearsActive = 0;
+
+    public array $timeline = [];
 
     public function mount(): void
     {
+        $this->yearsActive = now()->year - $this->foundedYear;
+
         $this->timeline = [
-            ['year' => '2012', 'title' => 'Fundação', 'description' => 'Nasce a comunidade PHP-PB'],
+            ['year' => (string) $this->foundedYear, 'title' => 'Fundação', 'description' => 'Nasce a comunidade PHP-PB'],
             ['year' => '2015', 'title' => 'Primeiro PHPeste', 'description' => 'Organizamos a primeira conferência regional'],
             ['year' => '2018', 'title' => '500 Membros', 'description' => 'Atingimos 500 desenvolvedores ativos'],
-            ['year' => '2026', 'title' => 'Presente', 'description' => 'Referência em PHP no Nordeste'],
+            ['year' => (string) now()->year, 'title' => 'Presente', 'description' => 'Referência em PHP no Nordeste'],
         ];
     }
 };
@@ -26,7 +32,7 @@ new class extends Component
                 Nossa História
             </div>
             <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6">
-                Uma Jornada de <span class="text-gradient">13 Anos</span>
+                Uma Jornada de <span class="text-gradient">{{ $yearsActive }} Anos</span>
             </h2>
             <p class="text-lg text-slate-300">
                 Desde 2012 conectando e fortalecendo a comunidade PHP na Paraíba
@@ -60,20 +66,20 @@ new class extends Component
         </div>
 
         <!-- Stats -->
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 text-center">
-                <div class="font-display text-5xl font-black text-white mb-2">13+</div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-slate-700 bg-slate-800 rounded-2xl border border-slate-700 mb-16 overflow-hidden">
+            <div class="p-8 text-center">
+                <div class="font-display text-5xl font-black text-white mb-2">{{ $yearsActive }}+</div>
                 <div class="text-slate-400">Anos de história</div>
             </div>
-            <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 text-center">
+            <div class="p-8 text-center">
                 <div class="font-display text-5xl font-black text-white mb-2">500+</div>
                 <div class="text-slate-400">Membros ativos</div>
             </div>
-            <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 text-center">
+            <div class="p-8 text-center">
                 <div class="font-display text-5xl font-black text-white mb-2">50+</div>
                 <div class="text-slate-400">Eventos realizados</div>
             </div>
-            <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 text-center">
+            <div class="p-8 text-center">
                 <div class="font-display text-5xl font-black text-white mb-2">6</div>
                 <div class="text-slate-400">Edições do PHPeste</div>
             </div>
