@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +17,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::updateOrCreate(
+            ['email' => 'admin@php-pb.net'],
+            [
+                'name' => 'Admin',
+                'slug' => 'admin',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+                'role' => UserRole::Admin,
+                'cargo' => 'Organizador PHP-PB',
+                'bio' => 'Mantenedor do site e organizador da comunidade PHP-PB.',
+                'stack' => ['PHP', 'Laravel', 'Livewire'],
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'usuario@php-pb.net'],
+            [
+                'name' => 'Usuário Teste',
+                'slug' => 'usuario-teste',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+                'role' => UserRole::Member,
+                'cargo' => 'Desenvolvedor Back-End',
+                'bio' => 'Membro da comunidade PHP-PB, apaixonado por PHP e Laravel.',
+                'github_url' => 'https://github.com',
+                'linkedin_url' => 'https://linkedin.com',
+                'stack' => ['PHP', 'Laravel', 'MySQL'],
+            ]
+        );
     }
 }
