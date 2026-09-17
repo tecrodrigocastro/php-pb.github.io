@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\PostResource\Pages;
+namespace App\Filament\Concerns;
 
 use App\Filament\Fields\PostContent;
 use Filament\Schemas\Components\Component;
