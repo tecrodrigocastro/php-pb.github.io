@@ -18,11 +18,9 @@ new class extends Component {
     <!-- Gradient overlay -->
     <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900"></div>
 
-    <!-- PHP Logo large background -->
-    <div class="absolute right-0 top-1/2 -translate-y-1/2 opacity-5 hidden lg:block pointer-events-none">
-        <svg width="600" height="600" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <text x="50" y="70" font-size="80" fill="currentColor" text-anchor="middle" class="font-display font-black">PHP</text>
-        </svg>
+    <!-- Logo grande de fundo -->
+    <div class="absolute -right-16 top-1/2 -translate-y-1/2 opacity-10 hidden lg:block pointer-events-none">
+        <img src="{{ asset('images/logo_phppb.png') }}" alt="" class="w-[480px] grayscale">
     </div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 w-full">
@@ -40,7 +38,7 @@ new class extends Component {
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-500 italic">
                         COMUNIDADE
                     </span>
-                    <span class="text-white italic"> PHP</span>
+                    <span class="text-white italic"> DE PHP</span>
                 </span>
                 <span class="block text-white">DA PARAÍBA</span>
             </h1>
@@ -63,24 +61,6 @@ new class extends Component {
                    class="px-8 py-4 border-2 border-slate-600 rounded-xl font-bold text-lg text-slate-300 hover:bg-slate-800 hover:border-slate-500 transition-all inline-flex items-center justify-center">
                     Explorar Conteúdo
                 </a>
-            </div>
-
-            <!-- Stats bar -->
-            <div class="flex flex-wrap gap-8 justify-center text-center scroll-reveal">
-                <div>
-                    <div class="text-4xl lg:text-5xl font-black text-white font-display">13+</div>
-                    <div class="text-slate-400 text-sm font-medium mt-1">Anos Ativos</div>
-                </div>
-                <div class="w-px h-16 bg-slate-700"></div>
-                <div>
-                    <div class="text-4xl lg:text-5xl font-black text-white font-display">500+</div>
-                    <div class="text-slate-400 text-sm font-medium mt-1">Membros</div>
-                </div>
-                <div class="w-px h-16 bg-slate-700"></div>
-                <div>
-                    <div class="text-4xl lg:text-5xl font-black text-white font-display">50+</div>
-                    <div class="text-slate-400 text-sm font-medium mt-1">Eventos</div>
-                </div>
             </div>
         </div>
     </div>
