@@ -2,10 +2,15 @@
     <livewire:landing.header />
 
     <main>
-        <livewire:landing.hero />
+        <livewire:landing.hero-v2 />
+        <livewire:landing.activity-feed />
         <livewire:landing.about />
+        <livewire:landing.featured-members />
         <livewire:landing.features />
+        <livewire:landing.events-timeline />
+        <livewire:landing.blog-preview />
         <livewire:landing.community />
+        <livewire:landing.cta-final />
     </main>
 
     <livewire:landing.footer />

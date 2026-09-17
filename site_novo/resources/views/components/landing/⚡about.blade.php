@@ -4,104 +4,132 @@ use Livewire\Component;
 
 new class extends Component
 {
-    //
+    public int $foundedYear = 2012;
+
+    public int $yearsActive = 0;
+
+    public array $timeline = [];
+
+    public function mount(): void
+    {
+        $this->yearsActive = now()->year - $this->foundedYear;
+
+        $this->timeline = [
+            ['year' => (string) $this->foundedYear, 'title' => 'Fundação', 'description' => 'Nasce a comunidade PHP-PB'],
+            ['year' => '2015', 'title' => 'Primeiro PHPeste', 'description' => 'Organizamos a primeira conferência regional'],
+            ['year' => '2018', 'title' => '500 Membros', 'description' => 'Atingimos 500 desenvolvedores ativos'],
+            ['year' => (string) now()->year, 'title' => 'Presente', 'description' => 'Referência em PHP no Nordeste'],
+        ];
+    }
 };
 ?>
 
-<section id="sobre" class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-900">
+<section id="sobre" class="py-20 lg:py-32 bg-slate-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
-            <!-- Image/Illustration -->
-            <div class="relative mx-4 lg:mx-0">
-                <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900 dark:to-primary-800 flex items-center justify-center">
-                    <img src="{{ asset('images/php-pb-logo.svg') }}" class="w-3/4 max-w-xs lg:max-w-sm" alt="PHP-PB Logo">
-                </div>
-                <!-- Floating elements -->
-                <div class="absolute top-4 right-4 lg:-top-4 lg:-right-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 lg:p-4">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-8 h-8 lg:w-10 lg:h-10 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                            <svg class="w-4 h-4 lg:w-5 lg:h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
-                        </div>
-                        <span class="text-xs lg:text-sm font-medium text-gray-900 dark:text-white">Comunidade Ativa</span>
-                    </div>
-                </div>
-                <div class="absolute bottom-4 left-4 lg:-bottom-4 lg:-left-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 lg:p-4">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-8 h-8 lg:w-10 lg:h-10 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
-                            <svg class="w-4 h-4 lg:w-5 lg:h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                            </svg>
-                        </div>
-                        <span class="text-xs lg:text-sm font-medium text-gray-900 dark:text-white">+500 membros</span>
-                    </div>
-                </div>
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <div class="inline-flex items-center px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-sm font-medium mb-4">
+                Nossa História
             </div>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6">
+                Uma Jornada de <span class="text-gradient">{{ $yearsActive }} Anos</span>
+            </h2>
+            <p class="text-lg text-slate-300">
+                Desde 2012 conectando e fortalecendo a comunidade PHP na Paraíba
+            </p>
+        </div>
 
-            <!-- Content -->
-            <div>
-                <div class="inline-flex items-center px-3 py-1 bg-primary-100 dark:bg-primary-900 rounded-full text-primary-700 dark:text-primary-300 text-sm font-medium mb-4">
-                    Sobre nós
+        <!-- Timeline -->
+        <div class="relative mb-20">
+            <!-- Line -->
+            <div class="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-700 hidden lg:block"></div>
+            
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative">
+                @foreach($timeline as $index => $milestone)
+                    <div class="text-center">
+                        <!-- Dot -->
+                        <div class="flex justify-center mb-4">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full ring-8 ring-slate-800"></div>
+                        </div>
+                        
+                        <!-- Year -->
+                        <div class="font-display text-3xl lg:text-4xl font-black text-white mb-2">{{ $milestone['year'] }}</div>
+                        
+                        <!-- Title -->
+                        <h3 class="font-bold text-white mb-1">{{ $milestone['title'] }}</h3>
+                        
+                        <!-- Description -->
+                        <p class="text-sm text-slate-400">{{ $milestone['description'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-slate-700 bg-slate-800 rounded-2xl border border-slate-700 mb-16 overflow-hidden">
+            <div class="p-8 text-center">
+                <div class="font-display text-5xl font-black text-white mb-2">{{ $yearsActive }}+</div>
+                <div class="text-slate-400">Anos de história</div>
+            </div>
+            <div class="p-8 text-center">
+                <div class="font-display text-5xl font-black text-white mb-2">500+</div>
+                <div class="text-slate-400">Membros ativos</div>
+            </div>
+            <div class="p-8 text-center">
+                <div class="font-display text-5xl font-black text-white mb-2">50+</div>
+                <div class="text-slate-400">Eventos realizados</div>
+            </div>
+            <div class="p-8 text-center">
+                <div class="font-display text-5xl font-black text-white mb-2">6</div>
+                <div class="text-slate-400">Edições do PHPeste</div>
+            </div>
+        </div>
+
+        <!-- Values -->
+        <div class="max-w-4xl mx-auto">
+            <h3 class="font-display text-2xl lg:text-3xl font-bold text-white text-center mb-12">
+                O que nos <span class="text-gradient">move</span>
+            </h3>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-white mb-2">Compartilhamento</h4>
+                    <p class="text-slate-400 text-sm">Acreditamos no poder do conhecimento compartilhado e no crescimento coletivo.</p>
                 </div>
 
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-                    Comunidade PHP na Paraíba
-                </h2>
+                <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-violet-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-white mb-2">Comunidade</h4>
+                    <p class="text-slate-400 text-sm">Valorizamos conexões genuínas e o suporte mútuo entre desenvolvedores.</p>
+                </div>
 
-                <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                    Somos um grupo de desenvolvedores PHP apaixonados por tecnologia, formados através do objetivo de promover a interatividade entre pessoas interessadas na linguagem de programação PHP.
-                </p>
+                <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-white mb-2">Inovação</h4>
+                    <p class="text-slate-400 text-sm">Incentivamos a experimentação e a adoção de novas tecnologias e práticas.</p>
+                </div>
 
-                <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                    Desde 2012, organizamos meetups, hangouts, workshops e conferências para compartilhar conhecimento e fortalecer a comunidade de desenvolvedores no estado.
-                </p>
-
-                <div class="grid sm:grid-cols-2 gap-6">
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center shrink-0">
-                            <svg class="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900 dark:text-white">Compartilhar conhecimento</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Palestras, artigos e tutoriais</p>
-                        </div>
+                <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
                     </div>
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center shrink-0">
-                            <svg class="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900 dark:text-white">Networking</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Conexões profissionais</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center shrink-0">
-                            <svg class="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900 dark:text-white">Eventos</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Meetups e conferências</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center shrink-0">
-                            <svg class="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900 dark:text-white">Oportunidades</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Vagas e projetos</p>
-                        </div>
-                    </div>
+                    <h4 class="font-bold text-white mb-2">Qualidade</h4>
+                    <p class="text-slate-400 text-sm">Promovemos código limpo, boas práticas e desenvolvimento profissional.</p>
                 </div>
             </div>
         </div>
