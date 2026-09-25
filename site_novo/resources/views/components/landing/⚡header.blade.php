@@ -36,6 +36,12 @@ new class extends Component
                 <a href="/blog" class="text-slate-300 hover:text-blue-400 transition-colors font-medium">
                     Blog
                 </a>
+                <a href="{{ route('jobs.index') }}" class="text-slate-300 hover:text-blue-400 transition-colors font-medium">
+                    Vagas
+                </a>
+                <a href="{{ route('speakers.index') }}" class="text-slate-300 hover:text-blue-400 transition-colors font-medium">
+                    Palestrantes
+                </a>
             </nav>
 
             <!-- CTA Button -->
@@ -66,6 +72,8 @@ new class extends Component
             <a href="#comunidade" class="block text-slate-300 hover:text-blue-400 font-medium py-2">Comunidade</a>
             <a href="#eventos" class="block text-slate-300 hover:text-blue-400 font-medium py-2">Eventos</a>
             <a href="/blog" class="block text-slate-300 hover:text-blue-400 font-medium py-2">Blog</a>
+            <a href="{{ route('jobs.index') }}" class="block text-slate-300 hover:text-blue-400 font-medium py-2">Vagas</a>
+            <a href="{{ route('speakers.index') }}" class="block text-slate-300 hover:text-blue-400 font-medium py-2">Palestrantes</a>
             <a href="https://chat.whatsapp.com/JaWCta8t2DF9Af0zgIb8LB?mode=gi_t" target="_blank" rel="noopener"
                class="block w-full text-center px-4 py-2 bg-gradient-to-r from-blue-500 to-violet-600 text-white font-medium rounded-lg transition-colors">
                 Entrar no WhatsApp

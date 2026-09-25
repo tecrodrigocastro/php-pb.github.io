@@ -6,6 +6,7 @@ use App\Enums\EventType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
 
 class Event extends Model
@@ -59,5 +60,10 @@ class Event extends Model
         }
 
         return null;
+    }
+
+    public function speakers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }

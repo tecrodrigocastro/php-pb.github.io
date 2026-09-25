@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\EventType;
 use App\Filament\Resources\EventResource\Pages;
 use App\Models\Event;
+use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DateTimePicker;
@@ -96,6 +97,15 @@ class EventResource extends Resource
             Textarea::make('description')
                 ->label('Descrição')
                 ->rows(4)
+                ->columnSpanFull(),
+
+            Select::make('speakers')
+                ->label('Palestrantes')
+                ->relationship('speakers', 'name')
+                ->multiple()
+                ->searchable()
+                ->preload()
+                ->getOptionLabelFromRecordUsing(fn (User $user) => $user->cargo ? "{$user->name} ({$user->cargo})" : $user->name)
                 ->columnSpanFull(),
 
             FileUpload::make('banner')

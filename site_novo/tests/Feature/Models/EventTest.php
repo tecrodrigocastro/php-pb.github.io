@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 test('published scope only returns events with a published_at in the past', function () {
@@ -29,4 +30,16 @@ test('getBanner returns null when there is no banner', function () {
     $event = Event::factory()->create(['banner' => null]);
 
     expect($event->getBanner())->toBeNull();
+});
+
+test('it can have multiple speakers', function () {
+    $event = Event::factory()->create();
+    $speaker = User::factory()->create();
+
+    $event->speakers()->attach($speaker);
+
+    expect($event->speakers)->toHaveCount(1)
+        ->and($event->speakers->first()->id)->toBe($speaker->id)
+        ->and($speaker->speakingEvents)->toHaveCount(1)
+        ->and($speaker->speakingEvents->first()->id)->toBe($event->id);
 });
