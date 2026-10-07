@@ -5,6 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Comunidade PHP da Paraíba - Conectando desenvolvedores, compartilhando conhecimento e fortalecendo a comunidade PHP no estado.">
 
+        <script>
+            (function () {
+                var stored = localStorage.getItem('theme');
+                var theme = stored ?? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                if (theme === 'light') {
+                    document.documentElement.dataset.theme = 'light';
+                }
+            })();
+        </script>
+
         <title>{{ $title ?? config('app.name') }}</title>
 
         <!-- Favicon -->
