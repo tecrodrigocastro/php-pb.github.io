@@ -28,25 +28,43 @@
     --color-accent-700: #356693;
 }
 
+/* Tema claro - sobrescreve os tokens de fundo/borda/texto neutro e o
+   role de texto em acento (que precisa de um degrade mais escuro da
+   escala accent pra continuar legível sobre fundo claro). */
+:root {
+    --color-accent-text: var(--color-accent-400);
+}
+
+[data-theme='light'] {
+    --color-ink-950: #f5f7fa;
+    --color-ink-900: #eef2f7;
+    --color-ink-800: #ffffff;
+    --color-ink-700: #d7e0ea;
+    --color-ink-600: #b8c7d9;
+    --color-ink-400: #5c6b7d;
+    --color-ink-100: #16304a;
+    --color-accent-text: var(--color-accent-700);
+}
+
 /* Gradiente sutil, um único tom (accent escuro -> accent) */
 .gradient-hero {
-    background: linear-gradient(135deg, #0a1620 0%, #16304a 50%, #356693 100%);
+    background: linear-gradient(135deg, var(--color-ink-950) 0%, var(--color-ink-800) 50%, var(--color-accent-700) 100%);
 }
 
 .gradient-hero-alt {
-    background: linear-gradient(135deg, #0a1620 0%, #16304a 100%);
+    background: linear-gradient(135deg, var(--color-ink-950) 0%, var(--color-ink-800) 100%);
 }
 
 .text-accent {
-    color: var(--color-accent-400);
+    color: var(--color-accent-text);
 }
 
 .gradient-cta {
-    background: linear-gradient(135deg, #356693 0%, #5b9bd3 100%);
+    background: linear-gradient(135deg, var(--color-accent-700) 0%, var(--color-accent-500) 100%);
 }
 
 .gradient-cta:hover {
-    background: linear-gradient(135deg, #2c5277 0%, #4580b3 100%);
+    background: linear-gradient(135deg, var(--color-accent-600) 0%, var(--color-accent-400) 100%);
 }
 
 /* Textura sutil pra quebrar a chapadura das seções escuras */
