@@ -11,7 +11,7 @@
             <figure>
                 <img class="w-full {{ $ratioClass }} object-cover object-center rounded-lg"
                      src="{{ $src }}" alt="{{ $alt }}">
-                <figcaption class="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">
+                <figcaption class="mt-2 text-center text-sm text-ink-400">
                     {{ $caption }}
                 </figcaption>
             </figure>

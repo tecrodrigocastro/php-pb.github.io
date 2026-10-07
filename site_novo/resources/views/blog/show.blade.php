@@ -48,7 +48,7 @@
             @endif
 
             <!-- Rodapé do post -->
-            <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <div class="mt-16 pt-8 border-t border-ink-700">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     @if ($post->author)
                         <div class="flex items-center gap-4">
@@ -58,16 +58,16 @@
                                      alt="{{ $post->author->name }}">
                             @endif
                             <div>
-                                <p class="font-semibold text-gray-900 dark:text-white">{{ $post->author->name }}</p>
+                                <p class="font-semibold text-ink-100">{{ $post->author->name }}</p>
                                 @if ($post->author->bio)
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ $post->author->bio }}</p>
+                                    <p class="text-sm text-ink-400">{{ $post->author->bio }}</p>
                                 @endif
                             </div>
                         </div>
                     @endif
 
                     <a href="{{ route('blog.index') }}"
-                       class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 font-medium hover:underline">
+                       class="inline-flex items-center gap-2 text-accent font-medium hover:underline">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                         </svg>
