@@ -45,11 +45,11 @@ new class extends Component {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="max-w-2xl mb-16">
-            <div class="text-accent-400 text-sm font-semibold tracking-wide mb-4">
+            <div class="text-accent text-sm font-semibold tracking-wide mb-4">
                 Comunidade
             </div>
             <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink-100 mb-6 text-balance">
-                Membros em <span class="text-accent-400">destaque</span>
+                Membros em <span class="text-accent">destaque</span>
             </h2>
             <p class="text-lg text-ink-400">
                 Conheça alguns dos desenvolvedores mais ativos da nossa comunidade
@@ -69,7 +69,7 @@ new class extends Component {
 
                     <!-- Info -->
                     <h3 class="font-display text-xl font-semibold text-ink-100 mb-1">{{ $member['name'] }}</h3>
-                    <p class="text-accent-400 text-sm font-medium mb-4">{{ $member['role'] }}</p>
+                    <p class="text-accent text-sm font-medium mb-4">{{ $member['role'] }}</p>
                     <p class="text-ink-400 text-sm mb-6">{{ $member['bio'] }}</p>
 
                     <!-- Tech Stack -->
@@ -104,7 +104,7 @@ new class extends Component {
         <div class="text-center mt-12">
             <p class="text-ink-400 mb-4">Quer aparecer aqui?</p>
             <a href="https://chat.whatsapp.com/JaWCta8t2DF9Af0zgIb8LB?mode=gi_t" target="_blank" rel="noopener"
-               class="inline-flex items-center px-6 py-3 bg-accent-500 hover:bg-accent-600 active:scale-[0.98] text-ink-950 font-semibold rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-300">
+               class="inline-flex items-center px-6 py-3 bg-accent-600 hover:bg-accent-700 active:scale-[0.98] text-white font-semibold rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-300">
                 Junte-se à comunidade
                 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>

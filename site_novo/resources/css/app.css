@@ -55,7 +55,7 @@
     background: linear-gradient(135deg, var(--color-ink-950) 0%, var(--color-ink-800) 100%);
 }
 
-.text-accent {
+@utility text-accent {
     color: var(--color-accent-text);
 }
 

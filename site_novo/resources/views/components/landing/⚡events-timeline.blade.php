@@ -17,14 +17,14 @@ new class extends Component {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="max-w-2xl mb-16">
-            <div class="inline-flex items-center text-accent-400 text-sm font-semibold tracking-wide mb-4">
+            <div class="inline-flex items-center text-accent text-sm font-semibold tracking-wide mb-4">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
                 Próximos encontros
             </div>
             <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink-100 mb-6 text-balance">
-                Eventos da <span class="text-accent-400">comunidade</span>
+                Eventos da <span class="text-accent">comunidade</span>
             </h2>
             <p class="text-lg text-ink-400">
                 Participe dos nossos meetups, workshops e conferências
@@ -40,7 +40,7 @@ new class extends Component {
 
                         <!-- Highlight badge -->
                         @if ($event->is_featured)
-                            <div class="absolute top-0 right-0 bg-accent-500 text-ink-950 text-xs font-bold px-4 py-1 rounded-bl-xl">
+                            <div class="absolute top-0 right-0 bg-accent-600 text-white text-xs font-bold px-4 py-1 rounded-bl-xl">
                                 DESTAQUE
                             </div>
                         @endif
@@ -51,7 +51,7 @@ new class extends Component {
                                 <div class="inline-flex lg:block bg-ink-900 rounded-xl p-4 text-center">
                                     <div>
                                         <div class="font-display text-4xl lg:text-5xl font-semibold text-ink-100">{{ $event->starts_at->format('d') }}</div>
-                                        <div class="text-accent-400 font-semibold text-sm mt-1">{{ mb_strtoupper($event->starts_at->translatedFormat('M')) }}</div>
+                                        <div class="text-accent font-semibold text-sm mt-1">{{ mb_strtoupper($event->starts_at->translatedFormat('M')) }}</div>
                                         <div class="text-ink-400 text-xs">{{ $event->starts_at->format('Y') }}</div>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@ new class extends Component {
                                     </div>
 
                                     <!-- Type badge -->
-                                    <span class="px-3 py-1 bg-accent-500/15 text-accent-300 rounded-full text-xs font-medium">
+                                    <span class="px-3 py-1 bg-accent-500/15 text-accent rounded-full text-xs font-medium">
                                         {{ $event->type->getLabel() }}
                                     </span>
                                 </div>
@@ -102,7 +102,7 @@ new class extends Component {
                                 <!-- CTA -->
                                 @if ($event->external_url)
                                     <a href="{{ $event->external_url }}" target="_blank" rel="noopener"
-                                       class="px-6 py-3 bg-accent-500 hover:bg-accent-600 active:scale-[0.98] text-ink-950 font-semibold rounded-lg transition-all text-center whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-300">
+                                       class="px-6 py-3 bg-accent-600 hover:bg-accent-700 active:scale-[0.98] text-white font-semibold rounded-lg transition-all text-center whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-300">
                                         Confirmar Presença
                                     </a>
                                 @endif

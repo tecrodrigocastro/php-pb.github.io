@@ -49,10 +49,10 @@ new class extends Component
             <div>
                 <h4 class="font-semibold text-ink-100 mb-4">Links</h4>
                 <ul class="space-y-3">
-                    <li><a href="#sobre" class="text-ink-400 hover:text-accent-300 transition-colors">Sobre</a></li>
-                    <li><a href="#comunidade" class="text-ink-400 hover:text-accent-300 transition-colors">Comunidade</a></li>
-                    <li><a href="#eventos" class="text-ink-400 hover:text-accent-300 transition-colors">Eventos</a></li>
-                    <li><a href="/blog" class="text-ink-400 hover:text-accent-300 transition-colors">Blog</a></li>
+                    <li><a href="#sobre" class="text-ink-400 hover:text-accent transition-colors">Sobre</a></li>
+                    <li><a href="#comunidade" class="text-ink-400 hover:text-accent transition-colors">Comunidade</a></li>
+                    <li><a href="#eventos" class="text-ink-400 hover:text-accent transition-colors">Eventos</a></li>
+                    <li><a href="/blog" class="text-ink-400 hover:text-accent transition-colors">Blog</a></li>
                 </ul>
             </div>
 
@@ -60,10 +60,10 @@ new class extends Component
             <div>
                 <h4 class="font-semibold text-ink-100 mb-4">Recursos</h4>
                 <ul class="space-y-3">
-                    <li><a href="https://phpeste.org" target="_blank" rel="noopener" class="text-ink-400 hover:text-accent-300 transition-colors">PHPeste</a></li>
-                    <li><a href="https://php.net" target="_blank" rel="noopener" class="text-ink-400 hover:text-accent-300 transition-colors">PHP.net</a></li>
-                    <li><a href="https://laravel.com" target="_blank" rel="noopener" class="text-ink-400 hover:text-accent-300 transition-colors">Laravel</a></li>
-                    <li><a href="https://www.php-fig.org" target="_blank" rel="noopener" class="text-ink-400 hover:text-accent-300 transition-colors">PHP-FIG</a></li>
+                    <li><a href="https://phpeste.org" target="_blank" rel="noopener" class="text-ink-400 hover:text-accent transition-colors">PHPeste</a></li>
+                    <li><a href="https://php.net" target="_blank" rel="noopener" class="text-ink-400 hover:text-accent transition-colors">PHP.net</a></li>
+                    <li><a href="https://laravel.com" target="_blank" rel="noopener" class="text-ink-400 hover:text-accent transition-colors">Laravel</a></li>
+                    <li><a href="https://www.php-fig.org" target="_blank" rel="noopener" class="text-ink-400 hover:text-accent transition-colors">PHP-FIG</a></li>
                 </ul>
             </div>
         </div>
@@ -74,7 +74,7 @@ new class extends Component
                 &copy; {{ date('Y') }} PHP-PB. Todos os direitos reservados.
             </p>
             <p class="text-ink-400 text-sm">
-                Feito com <span class="text-accent-400">&hearts;</span> pela comunidade
+                Feito com <span class="text-accent">&hearts;</span> pela comunidade
             </p>
         </div>
     </div>

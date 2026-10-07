@@ -12,11 +12,11 @@ new class extends Component
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="max-w-2xl mb-16">
-            <div class="text-accent-400 text-sm font-semibold tracking-wide mb-4">
+            <div class="text-accent text-sm font-semibold tracking-wide mb-4">
                 Comunidades parceiras
             </div>
             <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink-100 mb-6 text-balance">
-                Juntos somos mais <span class="text-accent-400">fortes</span>
+                Juntos somos mais <span class="text-accent">fortes</span>
             </h2>
             <p class="text-lg text-ink-400">
                 Fazemos parte de uma rede de comunidades PHP do Nordeste que juntas organizam o PHPeste.
@@ -28,7 +28,7 @@ new class extends Component
             <!-- PHP-PB -->
             <div class="bg-ink-900 rounded-2xl p-6 text-center hover:bg-ink-800 transition-all">
                 <div class="w-16 h-16 bg-accent-500/15 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="text-2xl font-semibold text-accent-400 font-display">PB</span>
+                    <span class="text-2xl font-semibold text-accent font-display">PB</span>
                 </div>
                 <h3 class="font-semibold text-ink-100 mb-1">PHP-PB</h3>
                 <p class="text-sm text-ink-400">Paraíba</p>
@@ -37,7 +37,7 @@ new class extends Component
             <!-- PHP com Rapadura -->
             <div class="bg-ink-900 rounded-2xl p-6 text-center hover:bg-ink-800 transition-all">
                 <div class="w-16 h-16 bg-accent-500/15 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="text-2xl font-semibold text-accent-400 font-display">CE</span>
+                    <span class="text-2xl font-semibold text-accent font-display">CE</span>
                 </div>
                 <h3 class="font-semibold text-ink-100 mb-1">PHP com Rapadura</h3>
                 <p class="text-sm text-ink-400">Ceará</p>
@@ -46,7 +46,7 @@ new class extends Component
             <!-- PHP PE -->
             <div class="bg-ink-900 rounded-2xl p-6 text-center hover:bg-ink-800 transition-all">
                 <div class="w-16 h-16 bg-accent-500/15 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="text-2xl font-semibold text-accent-400 font-display">PE</span>
+                    <span class="text-2xl font-semibold text-accent font-display">PE</span>
                 </div>
                 <h3 class="font-semibold text-ink-100 mb-1">PHP-PE</h3>
                 <p class="text-sm text-ink-400">Pernambuco</p>
@@ -55,7 +55,7 @@ new class extends Component
             <!-- PHP RN -->
             <div class="bg-ink-900 rounded-2xl p-6 text-center hover:bg-ink-800 transition-all">
                 <div class="w-16 h-16 bg-accent-500/15 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="text-2xl font-semibold text-accent-400 font-display">RN</span>
+                    <span class="text-2xl font-semibold text-accent font-display">RN</span>
                 </div>
                 <h3 class="font-semibold text-ink-100 mb-1">PHP-RN</h3>
                 <p class="text-sm text-ink-400">Rio Grande do Norte</p>
