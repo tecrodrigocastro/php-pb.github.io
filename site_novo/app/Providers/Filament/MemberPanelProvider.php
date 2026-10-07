@@ -2,12 +2,14 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Auth\Login;
+use App\Filament\Member\Pages\Dashboard;
 use App\Filament\Member\Pages\EditProfile;
+use Filament\Enums\UserMenuPosition;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -27,15 +29,19 @@ class MemberPanelProvider extends PanelProvider
         return $panel
             ->id('membro')
             ->path('membro')
-            ->login()
+            ->viteTheme('resources/css/filament/membro/theme.css')
+            ->login(Login::class)
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::generatePalette('#5b9bd3'),
             ])
+            ->font('Outfit')
+            ->userMenu(position: UserMenuPosition::Sidebar)
             ->discoverResources(in: app_path('Filament/Member/Resources'), for: 'App\Filament\Member\Resources')
             ->discoverPages(in: app_path('Filament/Member/Pages'), for: 'App\Filament\Member\Pages')
             ->pages([
                 Dashboard::class,
             ])
+            ->discoverWidgets(in: app_path('Filament/Member/Widgets'), for: 'App\Filament\Member\Widgets')
             ->widgets([
                 AccountWidget::class,
             ])
