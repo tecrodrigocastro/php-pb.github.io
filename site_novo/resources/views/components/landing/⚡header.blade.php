@@ -13,7 +13,16 @@ new class extends Component
 };
 ?>
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-ink-950/80 backdrop-blur-md border-b border-ink-700">
+<header
+    x-data="{
+        theme: document.documentElement.dataset.theme || 'dark',
+        toggleTheme() {
+            this.theme = this.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = this.theme === 'light' ? 'light' : '';
+            localStorage.setItem('theme', this.theme);
+        },
+    }"
+    class="fixed top-0 left-0 right-0 z-50 bg-ink-950/80 backdrop-blur-md border-b border-ink-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <!-- Logo -->
@@ -46,6 +55,19 @@ new class extends Component
 
             <!-- CTA Button -->
             <div class="hidden md:flex items-center space-x-4">
+                <button
+                    @click="toggleTheme"
+                    type="button"
+                    aria-label="Alternar tema claro/escuro"
+                    class="p-2 rounded-lg text-ink-400 hover:bg-ink-800 hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400"
+                >
+                    <svg x-show="theme === 'dark'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <svg x-show="theme === 'light'" x-cloak class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 1020.354 15.354z"/>
+                    </svg>
+                </button>
                 <a href="https://chat.whatsapp.com/JaWCta8t2DF9Af0zgIb8LB?mode=gi_t" target="_blank" rel="noopener"
                    class="inline-flex items-center px-4 py-2 bg-accent-600 hover:bg-accent-700 active:scale-[0.98] text-white font-semibold rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-300">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -74,6 +96,15 @@ new class extends Component
             <a href="/blog" class="block text-ink-400 hover:text-accent font-medium py-2">Blog</a>
             <a href="{{ route('jobs.index') }}" class="block text-ink-400 hover:text-accent font-medium py-2">Vagas</a>
             <a href="{{ route('speakers.index') }}" class="block text-ink-400 hover:text-accent font-medium py-2">Palestrantes</a>
+            <button @click="toggleTheme" type="button" class="flex items-center gap-2 text-ink-400 hover:text-accent font-medium py-2">
+                <svg x-show="theme === 'dark'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+                <svg x-show="theme === 'light'" x-cloak class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 1020.354 15.354z"/>
+                </svg>
+                <span x-text="theme === 'dark' ? 'Tema claro' : 'Tema escuro'"></span>
+            </button>
             <a href="https://chat.whatsapp.com/JaWCta8t2DF9Af0zgIb8LB?mode=gi_t" target="_blank" rel="noopener"
                class="block w-full text-center px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white font-semibold rounded-lg transition-colors">
                 Entrar no WhatsApp
