@@ -46,13 +46,11 @@
     --color-accent-text: var(--color-accent-700);
 }
 
-/* Gradiente sutil, um único tom (accent escuro -> accent) */
+/* Faixa de título das páginas internas (blog/vagas/palestrantes/eventos) -
+   usa só a escala accent (fixa, não inverte com o tema) pra continuar um
+   degradê vívido com texto branco legível nos dois temas. */
 .gradient-hero {
-    background: linear-gradient(135deg, var(--color-ink-950) 0%, var(--color-ink-800) 50%, var(--color-accent-700) 100%);
-}
-
-.gradient-hero-alt {
-    background: linear-gradient(135deg, var(--color-ink-950) 0%, var(--color-ink-800) 100%);
+    background: linear-gradient(135deg, var(--color-accent-700) 0%, var(--color-accent-500) 100%);
 }
 
 @utility text-accent {
