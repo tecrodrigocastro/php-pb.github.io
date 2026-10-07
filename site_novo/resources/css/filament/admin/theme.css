@@ -2,3 +2,8 @@
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+/* Painel de marca da tela de login */
+.fi-login-brand-panel {
+    background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-500) 100%);
+}
